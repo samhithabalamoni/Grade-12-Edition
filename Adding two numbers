@@ -1,0 +1,16 @@
+package practice;
+import java.util.Scanner;
+public class Calculator {
+	public static void main(String[] args) {
+		Scanner calc = new Scanner(System.in);
+		double fNum,lNum, ans;
+		System.out.println("Enter first no: ");
+		fNum = calc.nextDouble(); //nextDouble is a version of println for double variable
+		System.out.println("Enter second no: ");
+		lNum = calc.nextDouble();
+		ans = fNum + lNum;
+		System.out.print(ans);
+
+	}
+
+}
