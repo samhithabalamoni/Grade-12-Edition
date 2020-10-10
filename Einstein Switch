@@ -1,0 +1,26 @@
+package forloops;
+import java.util.Scanner;
+public class einstein_switch {
+//A PROGRAM WHERE IT PRINTS OUT THE FIRST LETTER OF THE FIRST AND LAST NAME WITH THE YEAR IN LOWERCASE
+
+    Scanner input = new Scanner (System.in);
+		System.out.println("What is your first name");
+		String first = input.nextLine();
+		System.out.println("What is your last name");
+    String last = input.nextLine();
+		System.out.println("Enter birth year");
+		String year = input.nextLine();
+
+		String firsts = first.toLowerCase();
+		String lasts = last.toLowerCase();
+		String username = (first + lasts.charAt(0));
+
+		char a = lasts.charAt(0);
+		char b = firsts.charAt(0);
+		String password = a+b+year;
+
+		System.out.println("Username: " + username + "Password: "+password);
+}
+}
+
+
