@@ -1,0 +1,33 @@
+import java.util.InputMismatchException;
+import java.util.Scanner;
+public class onlinecheckout_tester {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        boolean run = false;
+        do {
+            try {
+                System.out.println("Welcome to Starbucks! Enter 1 to continue the program, enter 2 to quit the program");
+                int answer = Integer.parseInt(input.nextLine());//user selects an option from menu
+                //menu
+                switch (answer) {
+                    case 1: {
+                        restaurant4 starbucks = new restaurant4(); //creating an object
+                        starbucks.TypeOfDrink();//method that includes all of the methods from constructor
+                        break;
+                    }
+                    case 2: {
+                        System.out.println("You have selected to quit. ");
+                        break;
+                    }
+                    default: {//if user does not enter 1 or 2
+                        System.err.println("INVALID INPUT");
+                        run=false;
+                        break;
+                    }
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("INVALID");
+            }
+        }while (run);
+    }
+}
