@@ -1,0 +1,45 @@
+import java.util.Scanner;
+
+public class careers_tester {
+
+        public static void main(String[] args) {
+            newcareer_constructor kumon = new newcareer_constructor(); //created object
+            Scanner input = new Scanner (System.in);
+            boolean run=false;
+            do {
+                try {
+                    System.out.println("Welcome to Kumon! Enter 1 to continue the program, enter 2 to quit the program");
+                    int answer = Integer.parseInt(input.nextLine());//user selects an option from menu
+                    //menu
+                    switch(answer) {
+                        case 1:{
+                            run=false;
+                            kumon.EnteringClass(); //behavioural
+                            kumon.GetSubject(); //getter
+                            kumon.SetTypeOfWork();//setter
+                            kumon.Marking(); //behavioural
+                            kumon.CleanUp(); //behavioural
+                            System.out.println(kumon.toString()); //overwritten string
+                            break;
+                        }
+
+                        case 2://does not quit, continues to loop
+                            System.out.println("You have selected to quit. ");
+                            break;
+
+                        default:{//if user does not enter 1 or 2
+                            System.err.println("INVALID INPUT");
+                            run=false;
+                            break;
+                        }
+                    }
+                }
+                catch(RuntimeException ex) {//if the user enters String or a double, loops back to try
+                    run=false;
+                    System.err.println("INVALID INPUT. ");
+                }
+            }while(run==false);//will keep running while run=false (option 1,2 or default/catch)
+
+        }
+    }
+
