@@ -1,0 +1,296 @@
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.InputMismatchException;
+import java.util.Scanner;
+public class newrestaurant {
+    //instance variables
+    static double totalPrice, priceOfBase, priceOfCold, priceOfCaffeine, temp, numOfCaffeine;
+    static int typeOfDrink, size, baseDrink, priceOfCup;
+    static String drink;
+
+    Scanner input = new Scanner(System.in); //scanner
+    String information = toString();
+
+    public int TypeOfDrink() {
+
+        System.out.println("Welcome to Starbucks!Which menu would you like to order from: \n1.Coffee-based Drinks \n2.Non-coffee based Drinks");
+        typeOfDrink = Integer.parseInt(input.nextLine()); //input for what type of drink the user wants, expects an int
+        boolean run = true;
+        do {
+            try {
+                switch (typeOfDrink) {
+                    case 1: {
+                        System.out.println("You have chosen to order a coffee-based drink!");
+                        //methods will follow in order
+                        setDrinkSize(); //setter
+                        getCaffeine(); //getter
+                        //setTemperature(); //setter, commenting this as i told the getCaffeine to continue with this method
+                        ColdToppings();
+
+                        getPriceAndTax();//getter
+                        System.out.println(information);
+                        run = false;
+                        break;
+                    }
+                    case 2: {
+                        NonCoffeeBaseDrink(); //following methods will follow
+                        setDrinkSize();
+                        setTemperature();
+                        ColdToppings();
+                        getPriceAndTax();
+                        System.out.println(information);
+                        run = false;
+                        break;
+                    }
+                    default: {
+                        System.out.println("INVALID!");
+                        TypeOfDrink();
+                        run = true;
+                        break;
+                    }
+                }
+
+            } catch (Exception e) {
+                System.out.println("INVALID");
+
+                TypeOfDrink();
+            }
+        }while(run);
+        return typeOfDrink;
+    }
+
+    public void NonCoffeeBaseDrink() {
+        boolean run = true;
+        do {
+            try {
+                System.out.println("Please specify what base drink you want from the menu (choose the number):\n1.Vanilla milk\n2.Chocolate Milk\n3.Specify the other type of base drink you want:");
+               baseDrink = Integer.parseInt(input.nextLine()); //user enters int
+                switch (baseDrink) {
+                    case 1: {
+                        System.out.println("You have chosen the vanilla milk! This is good! ");
+                     priceOfBase = 2.99; //price
+                     run=false;
+                        break; //break loop
+                    }
+                    case 2: {
+                        System.out.println("You have chosen the chocolate milk as your base drink! This is good!");
+                       priceOfBase = 3.99;
+                        run=false;
+                        break;
+                    }
+                    case 3: {
+                        System.out.println("Please enter the base drink: "); //user will enter
+                    priceOfBase = 4.99;//price
+                        run=false;
+                        drink = input.nextLine();//user specifies, if it does not match one already listed, string expected
+                        break;
+                    }
+                    default:{
+                        run=true;
+                        System.out.println("INVALID!");
+                        break;
+                    }
+                }
+
+            }
+            catch (InputMismatchException e) {
+                System.out.println("INVALID!");
+            }
+        } while (run);
+    }
+
+    public int setDrinkSize() { //setter method
+        boolean run = true;
+        do {
+            try {
+                System.out.println("Enter the number you want your size to be at\n1.Short:\n2.Medium\n3.Grande\n4.Venti\n");
+                int sizeNum = Integer.parseInt(input.nextLine());
+                switch(sizeNum) {
+                    case 1: {
+                        System.out.println("You ordered a short drink!");
+                        run = false;
+                        break;
+                    }
+                    case 2: {
+                        System.out.println("You ordered a medium drink!");
+                        run = false;
+                        break;
+                    }
+                    case 3: {
+                        System.out.println("You ordered a grande drink!");
+                        run = false;
+                        break;
+                    }
+                    case 4: {
+                        System.out.println("You ordered a venti drink!");
+                        run = false;
+                        break;
+                    }
+                    default: {
+                        System.out.println("INVALID");
+                        run = true;
+                        break;
+                    }
+                }
+            }
+            catch (Exception e) { //tries to catch any input errors
+                System.out.println("INVALID!");
+                setDrinkSize();
+            } }while (run);
+        return size;
+    }
+    public double getCaffeine() { //getter method
+        boolean run = false;
+        numOfCaffeine=0;
+        do {
+            try {
+                priceOfCaffeine = 1.99 * numOfCaffeine;
+                System.out.println("As coffee-based drinks already have caffeine, how many extra spoons of caffeine do you want?: ");
+                numOfCaffeine = input.nextDouble(); //expects an int
+                if (numOfCaffeine >=4 || numOfCaffeine == 0) { //alot of caffiene ||no caffeine, does not sound right
+                    System.out.println("This does not sound right! Are you sure about adding "+numOfCaffeine+"spoons in your drink?\n(Enter 1 for yes or 2 for no: )");
+                    int YorN=input.nextInt();
+                    if(YorN==1){
+                        System.out.println("Okay! We will still add "+numOfCaffeine+" in your coffee based drink!");
+                      setTemperature();
+                        run=false;
+                    }
+                    else if(YorN==2) {
+                        getCaffeine();
+                        run = false;
+                    }
+                }
+                else if (numOfCaffeine <= 3 && numOfCaffeine >= 1) {
+                    System.out.println("This sounds good!");
+                    setTemperature();
+                    run=false;
+                }
+                else{
+                    System.out.println("INVALID");
+                    getCaffeine();
+                    run=true;
+                }
+            }
+            catch (InputMismatchException e) {
+                System.out.println("INVALID");
+                getCaffeine();
+            }
+        }
+        while (run);
+        return numOfCaffeine; //returning value
+
+    }
+    public double setTemperature(){ //setter method
+        boolean run = true;
+        priceOfCup=0;
+        //int temp;
+        do{
+            try {
+                priceOfCup=0;
+                System.out.println("What temperature do you want your base drink to be at(Enter a number): ");
+                temp = input.nextDouble();
+                //cup holder
+                if (temp >= 70) {
+                    System.out.println("This is a very hot drink! Do you want a cup holder? (y/n)");
+                    String YorN = input.next();
+                    if (YorN.equalsIgnoreCase("y")) {
+                        System.out.println("Okay! We will provide you with a cup holder");
+                        priceOfCup=2;
+                        run = false;
+                    } else if (YorN.equalsIgnoreCase("n")) {
+                        System.out.println("Okay! That is fine!");
+                        run = false;
+                    }
+                    break;
+                }
+                else if(temp<=10){
+                    System.out.println("This sounds really cold! However, we will listen to the customer, THAT IS YOU!\n");
+                    run = false;
+                    break;
+                }
+                else{
+                    System.out.println("That sounds good!");
+                    run=true;
+                    break;
+                }
+            }
+            catch (InputMismatchException e) {
+                System.out.println("INVALID\n"); }
+            setTemperature();
+            break;
+        }
+        while(run);
+        return temp;
+
+    }
+    public void ColdToppings() {
+        boolean run = true;
+        System.out.println("Do you want cold toppings? Enter 'Y' for yes or 'N' for no");
+        String answer=input.next();
+        priceOfCold=0;
+        if(answer.equalsIgnoreCase("y")) {
+            do {
+                try {
+                    System.out.println("Please specify what topping you want from the menu (choose the number):\n1.Whipped cream\n2.Chocolate Syrup\n3.Ice:");
+                    int coldTopping = input.nextInt();
+                    switch (coldTopping) {
+                        case 1: {
+                            System.out.println("You have chosen whipped cream! This is good! ");
+                            priceOfCold = 0.99;
+                            run = true;
+
+                            break;
+                        }
+                        case 2: {
+                            System.out.println("You have chosen the chocolate syrup! This tastes amazing!");
+                            getPriceAndTax();
+                            priceOfCold = 0.99;
+
+                            run = true;
+                            break;
+                        }
+                        case 3: {
+                            System.out.println("You have chosen ice for your drink!");
+                            priceOfCold = 0.10;
+                            run = true;
+                            break;
+                        }
+
+                    }
+
+                } catch (InputMismatchException e) {
+                    System.out.println("INVALID!"); }
+            }
+            while (run);
+        }
+        else if (answer.equalsIgnoreCase("n")){
+            System.out.println("No problem!"); }
+    }
+
+
+
+    public double getPriceAndTax() { //getter method
+        totalPrice = baseDrink + priceOfCold +  priceOfCup + priceOfCaffeine;
+        System.out.println("The total price of the drink you made(minus tax) is $" + totalPrice);
+        System.out.println("Enter one of the following you want to use to pay for your food:\n1.Debit/Credit Card \n2.Cash");
+        int typeofPayment = input.nextInt();
+        double price = totalPrice;
+        double pay = (price+price*(0.13));
+        if (typeofPayment == 1) {
+            BigDecimal round2Decimal=new BigDecimal(pay).setScale(2,RoundingMode.HALF_UP); //math function
+            System.out.println("The price of your food is $" +round2Decimal);
+        } else {
+            BigDecimal round2Decimal = new BigDecimal(totalPrice).setScale(2,RoundingMode.HALF_UP);
+            System.out.println("The price of your food is $" + Math.round(totalPrice)); //rounding cash due to tax not existing in cash pay
+        }
+        return pay;
+    }
+    public String toString() { //toStringOVERWRITTEN
+        return ("At Starbucks, you ordered a really tasty drink! Have a nice day! Come back soon!");
+
+    }
+
+
+}
+
+
