@@ -1,0 +1,140 @@
+//SAMHITHA BALAMONI
+//NOVEMBER 4 2020
+//UPDATED: NOVEMBER 5 2020
+//PROGRAM: CAREERS
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class newcareer_constructor {
+    //instance variables
+    static int noOfStudents, time;
+    static String typeOfWork;
+    public String subject;
+
+
+    public int EnteringClass() {
+        while (true) { //while true, should continue with the method
+            try { //program should try this
+                this.time=time;
+                System.out.println("Enter the hour (3-7) that you are arriving right now: "); //added (3-7) as this is the actual timing
+                Scanner input = new Scanner(System.in);
+                int time = input.nextInt();
+
+                if (time == 3 || time == 4) { //default timing that user is recommended to pick
+                    System.out.println("Welcome!");
+                    break;
+                }
+                if (time < 3) {
+                    System.out.println("You are too early!");
+                }
+                if (time > 4) {
+                    System.out.println("You are too late!");
+                }
+            } catch (InputMismatchException e) { //in case for invalid inputs
+                System.out.println("Invalid Input. Try again.");
+            }
+        }
+        return 0;
+    }
+
+    public void GetSubject() {
+
+//        this.noOfStudents = noOfStudents;
+        while (true) {
+            Scanner input = new Scanner(System.in);
+            System.out.println("In Kumon, there are two programs. Enter which program you are marking for(reading or math): ");
+            String subject = input.nextLine();
+
+            if (subject.equals("MATH".toLowerCase())|| subject.equals("MATHEMATICS")) {
+                noOfStudents = 3;
+                System.out.println("Welcome to your Math Program! You are in charge of supervising" + noOfStudents+" students");
+                break;
+            }
+            else if (subject.equals("READING".toLowerCase())) {
+                noOfStudents = 6;
+                System.out.println("Welcome to your Reading Program! You are in charge of supervising " + noOfStudents+ " students");
+                break;
+            }
+            else if (subject != "MATH".toLowerCase() && subject != "READING".toLowerCase()) {
+                System.out.println("This input is invalid. There are no courses like " + subject);
+
+            }
+        }
+    }
+
+    public void SetTypeOfWork() {
+
+        while (true) {
+            try {
+                Scanner input = new Scanner(System.in);
+                System.out.println("Enter whether you will mark a student's homework or tests:");
+                String type= input.nextLine();
+
+                if (type.equals("TESTS".toLowerCase())||type.equals("TEST".toLowerCase())) { //adding tolowercase in case person types in capitals
+                    System.out.println("Mark a student's test!");
+                    break;
+                }
+                else if (type.equals("HOMEWORK".toLowerCase())) {
+                    System.out.println("Mark a student's homework sheets");
+                    break;
+                }
+            }
+            catch (Exception e) {
+                System.out.println("This is not a type of work. Try again");
+            }
+        }
+    }
+    public void Marking () {
+        try{
+            Scanner input = new Scanner(System.in);
+            System.out.print("How many tests/homework sheets are you marking?: ");
+            int numOfCourses = input.nextInt(); //enter # of sheets/tests
+            int sum=0;//doing this so sum has a variable
+
+            for (int counter = 0; counter < numOfCourses; counter++) { //as long as counter<numOfCourse, loop will continue
+                System.out.print("Enter the mark of each test/sheet: "); //enter mark
+                sum+=input.nextDouble();
+            }
+
+            double average = (double)sum / numOfCourses;
+            System.out.println("The total average of their work is : " + average);
+
+        } catch (Exception e) {
+            System.out.println("Invalid Input. Try Again: ");
+        }
+
+    }
+
+    public void CleanUp(){
+        try {
+            while (true) {
+                Scanner input=new Scanner(System.in);
+                System.out.println("What hour is it now?(after 3 or 4): ");
+                int time2= input.nextInt();
+
+                if (time2 >= 7) {
+                    System.out.println("It is time to clean up,!");
+                    break;
+                }
+                else if (time2 >= 5 && time2 < 7) {
+                    System.out.println("You still have to work now!");
+                    break;
+                }
+                else if (time2 < 3) {
+                    System.out.println("You are not supposed to be at Kumon. Try inputting the correct time again. ");
+                    input.nextInt();
+                }
+            }
+        }
+        catch (InputMismatchException e) {
+            System.out.println("Invalid Input!");
+        }
+    }
+    public String toString (){
+
+        return ("Thank you for all your hard work! See you next time!");
+    }
+
+}
+
+
